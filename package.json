@@ -1,0 +1,20 @@
+{
+  "name": "sangha-meet-core",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "git:pull": "git pull && npm run submodule:update",
+    "submodule:init": "git submodule update --init --recursive",
+    "submodule:update": "git submodule update --recursive --remote",
+    "ngrok": "ngrok http --url=plainly-talented-moth.ngrok-free.app 80",
+    "certbot:init": "docker run -v ./data/nginx:/etc/nginx/conf.d -v ./data/certbot:/etc/letsencrypt --name certbot -it --rm certbot/certbot certonly",
+    "docker:clean": "npm run docker:clean:containers && npm run docker:clean:images",
+    "docker:clean:containers": "docker stop $(docker ps -a -q) && docker rm $(docker ps -a -q)",
+    "docker:clean:images": "docker rmi $(docker images -q)",
+    "docker:login": "aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 306057522130.dkr.ecr.us-east-1.amazonaws.com"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
